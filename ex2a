@@ -1,0 +1,14 @@
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+filter = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+image = cv2.imread("baboon.jpg")
+sobel_verti_image = cv2.filter2D(image,-1,filter)
+sobel_hori_image = cv2.filter2D(image,-1,np.flip(filter.T, axis=0))
+plt.subplot(121)
+plt.imshow(sobel_verti_image, cmap='gray')
+plt.title("Vertical Edge")
+plt.subplot(122)
+plt.imshow(sobel_hori_image, cmap='gray')
+plt.title("Horizontal Edge")
+plt.show()
