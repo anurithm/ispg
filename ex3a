@@ -34,7 +34,7 @@ plt.xlabel('Bins')
 plt.show()
 img = cv.imread('butterfly.jpg',0)
 equ = cv.equalizeHist(img)
-res = np.hstack((img,equ)) #stacking images side-by-side
+res = np.hstack((img,equ)) 
 cv.imwrite('res.png',res)
 img = cv.imread('res.png',0)
 plt.imshow(img)
