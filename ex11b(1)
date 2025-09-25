@@ -1,0 +1,21 @@
+import numpy as np
+import librosa
+import matplotlib.pyplot as plt
+d_file = "speech.wav"
+d, sr = librosa.load(d_file,8000)
+plt.subplot(2,1,1)
+t=np.linspace(0,len(d)/sr,len(d))
+plt.plot(t,d, lw=1)
+plt.xlabel('Time in seconds')
+plt.ylabel('Amplitude')
+r = librosa.autocorrelate(d, max_size=10000)
+plt.subplot(2,1,2)
+print(r.shape)
+plt.title("Autocorrelation Plot") 
+plt.xlabel("Lags") 
+plt.ylabel('Coefficients')
+plt.acorr(r, maxlags = 20) 
+print("The Autocorrelation plot for the data is:") 
+plt.grid(True) 
+plt.tight_layout(pad=3.0)
+plt.show()
