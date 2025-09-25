@@ -1,0 +1,33 @@
+from scipy import signal
+import numpy as np
+import librosa
+import matplotlib.pyplot as plt
+d_file = "set1.wav"
+d1_file="set2.wav"
+d, sr = librosa.load(d_file,8000)
+d1, sr = librosa.load(d1_file,8000)
+plt.subplot(2,2,1)
+t=np.linspace(0,len(d)/sr,len(d))
+plt.plot(t,d, lw=1)
+y=signal.convolve(d,d1) 
+plt.grid(True)
+plt.xlabel('Time(s)')
+plt.ylabel('Amplitude')
+plt.subplot(2,2,2)
+t=np.linspace(0,len(d1)/sr,len(d1))
+plt.plot(t,d1, lw=1)
+plt.grid(True)
+plt.xlabel('Time(s)')
+plt.ylabel(' Amplitude')
+plt.subplot(2,2,3)
+t=np.linspace(0,len(y)/sr,len(y))
+plt.plot(t,y, lw=1)
+plt.grid(True)
+plt.title(‘Covolution of signals’)
+plt.xlabel('Time(s)')
+plt.ylabel(' Amplitude')
+plt.tight_layout()
+plt.grid(True)
+plt.show()
+plt.grid(True)
+plt.show()
