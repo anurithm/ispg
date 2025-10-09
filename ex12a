@@ -1,0 +1,24 @@
+import numpy as np
+import scipy.signal as sg
+import matplotlib.pyplot as plt
+import librosa
+from scipy.signal import butter,filtfilt
+d_file ="sample.wav"
+d, sr = librosa.load(d_file,sr=8000)
+t=np.linspace(0,len(d)/sr,len(d))
+plt.plot(t,d, lw=1)
+plt.xlabel('Time(s)')
+plt.ylabel('Amplitude')
+plt.title('Original speech file')
+plt.grid(True)
+plt.show()
+b, a = sg.butter(4, 2000. / (sr / 2.), 'high')
+d_fil = sg.filtfilt(b, a, d)
+fig, ax = plt.subplots(1, 1, figsize=(6, 3))
+t = np.linspace(0., len(d) / sr, len(d))
+ax.plot(t, d, lw=1)
+ax.plot(t, d_fil, lw=1)
+plt.xlabel('Time(s)')
+plt.title('High pass filter - Filtered signal(show in orange color)')
+plt.grid(True)
+plt.show()
