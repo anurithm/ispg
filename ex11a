@@ -4,8 +4,8 @@ import librosa
 import matplotlib.pyplot as plt
 d_file = "set1.wav"
 d1_file="set2.wav"
-d, sr = librosa.load(d_file,8000)
-d1, sr = librosa.load(d1_file,8000)
+d, sr = librosa.load(d_file,sr = 8000)
+d1, sr = librosa.load(d1_file,sr = 8000)
 plt.subplot(2,2,1)
 t=np.linspace(0,len(d)/sr,len(d))
 plt.plot(t,d, lw=1)
