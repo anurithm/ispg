@@ -4,8 +4,8 @@ from scipy import signal
 import numpy as np
 d_file = "sample1.wav"
 d1_file="sample2.wav"
-d, sr = librosa.load(d_file,8000)
-d1, sr = librosa.load(d1_file,8000)
+d, sr = librosa.load(d_file,sr = 8000)
+d1, sr = librosa.load(d1_file,sr = 8000)
 print(d)
 print(d1)
 correlation = np.correlate(d, d1, mode="full")
