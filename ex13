@@ -1,0 +1,6 @@
+import librosa
+y,sr=librosa.load("voice-sample.wav")
+print(y)
+print("Sample rate: {0}Hz".format(sr))
+print("Audio duration: {0}s".format(len(y) / sr))
+print(librosa.feature.mfcc(y=y,sr=sr,n_mfcc=13))
