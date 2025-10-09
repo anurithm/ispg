@@ -4,16 +4,15 @@ import matplotlib.pyplot as plt
 from scipy.io.wavfile import read, write
 import math
 def calEnergy(wave_data):
-
  energy = []
  sum = 0
  for i in range(len(wave_data)):
- sum = sum + (int(wave_data[i]) * int(wave_data[i]))
- if (i + 1) % 256 == 0:
- energy.append(sum)
- sum = 0
- elif i == len(wave_data) - 1:
- energy.append(sum)
+  sum = sum + (int(wave_data[i]) * int(wave_data[i]))
+  if (i + 1) % 256 == 0:
+   energy.append(sum)
+   sum = 0
+  elif i == len(wave_data) - 1:
+   energy.append(sum)
  return energy
 f = wave.open("sample1.wav" ,"rb")
 params = f.getparams()
@@ -39,7 +38,7 @@ plt.title('energy calculation')
 plt.show()
 FRAME_SIZE = 1024
 def ProcessFrame(frame, Fs):
- freq = max(frame)
+ freq = np.max(frame)
  return freq
 Fs, data = read('sample1.wav')
 numFrames = int(len(data) / FRAME_SIZE)
