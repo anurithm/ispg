@@ -1,0 +1,14 @@
+import cv2
+import matplotlib.pyplot as plt
+img = cv2.imread("E:\study5sem\lab\download (1).jpg")
+ycrcb = cv2.cvtColor(img, cv2.COLOR_BGR2YCrCb)
+clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+ycrcb[:, :, 0] = clahe.apply(ycrcb[:, :, 0])
+clahe_color = cv2.cvtColor(ycrcb, cv2.COLOR_YCrCb2BGR)
+plt.subplot(1, 2, 1)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("Original")
+plt.subplot(1, 2, 2)
+plt.imshow(cv2.cvtColor(clahe_color, cv2.COLOR_BGR2RGB))
+plt.title("CLAHE color")
+plt.show()
