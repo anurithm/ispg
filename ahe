@@ -2,22 +2,16 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 def adaptive_hist_equalization(img, tile_size=(8, 8)):
-
- h, w = img.shape
- th, tw = tile_size
-
- out = np.zeros_like(img)
-
- for i in range(0, h, th):
- for j in range(0, w, tw):
-
-     tile = img[i:min(i+th, h), j:min(j+tw, w)]
-
- equalized_tile = cv2.equalizeHist(tile)
-
- out[i:min(i+th, h), j:min(j+tw, w)] = equalized_tile
- return out
-img = cv2.imread("E:\study5sem\lab\download (1).jpg", 0)
+    h, w = img.shape
+    th, tw = tile_size
+    out = np.zeros_like(img)
+    for i in range(0, h, th):
+        for j in range(0, w, tw):
+            tile = img[i:min(i+th, h), j:min(j+tw, w)]
+            equalized_tile = cv2.equalizeHist(tile)
+            out[i:min(i+th, h), j:min(j+tw, w)] = equalized_tile
+    return out
+img = cv2.imread(r"C:\Users\anu\OneDrive\Pictures\flowr.webp", 0)
 ahe_img = adaptive_hist_equalization(img, tile_size=(32, 32))
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 clahe_img = clahe.apply(img)
