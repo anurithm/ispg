@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+import matplotlib.pyplot as plt
 query_img = cv2.imread('ship.jpg')
 train_img = cv2.imread('ship.jpg')
 query_img_bw = cv2.cvtColor(query_img,cv2.COLOR_BGR2GRAY)
@@ -12,8 +13,5 @@ matches = matcher.match(queryDescriptors,trainDescriptors)
 final_img = cv2.drawMatches(query_img, queryKeypoints,
 train_img, trainKeypoints, matches[:20],None)
 final_img = cv2.resize(final_img, (1000,650))
-while(1): 
- cv2.imshow("Matches", final_img) 
- if cv2.waitKey(20) & 0xFF == 27: 
- break
-cv2.destroyAllWindows()
+plt.imshow(final_img)
+plt.show()
