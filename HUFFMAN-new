@@ -1,4 +1,4 @@
-import cv2, heapq
+import cv2, heapq, numpy as np
 from collections import Counter
 img = cv2.imread(r"C:\Users\anu\OneDrive\Pictures\flowr.webp", 0)
 freq = Counter(img.flatten())
@@ -8,9 +8,18 @@ while len(heap) > 1:
     a, b = heapq.heappop(heap), heapq.heappop(heap)
     for p in a[1:]: p[1] = '0' + p[1]
     for p in b[1:]: p[1] = '1' + p[1]
-    heapq.heappush(heap, [a[0]+b[0]] + a[1:] + b[1:])
+    heapq.heappush(heap, [a[0] + b[0]] + a[1:] + b[1:] )
 codes = {a: b for a, b in heap[0][1:]}
+rev = {v: k for k, v in codes.items()}
 encoded = ''.join(codes[p] for p in img.flatten())
 print("Original bits:", img.size * 8)
-print("Compressed bits:", len(encoded))
-print("Compression Ratio: %.2f%%" % (len(encoded)/(img.size*8)*100))
+print("Encoded bits:", len(encoded))
+print("Compression ratio: %.2f%%" % (len(encoded) / (img.size * 8) * 100))
+decoded, code = [], ''
+for bit in encoded:
+    code += bit
+    if code in rev:
+        decoded.append(rev[code])
+        code = ''
+decoded = np.array(decoded).reshape(img.shape)
+
