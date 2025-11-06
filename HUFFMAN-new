@@ -1,0 +1,16 @@
+import cv2, heapq
+from collections import Counter
+img = cv2.imread(r"C:\Users\anu\OneDrive\Pictures\flowr.webp", 0)
+freq = Counter(img.flatten())
+heap = [[w, [s, ""]] for s, w in freq.items()]
+heapq.heapify(heap)
+while len(heap) > 1:
+    a, b = heapq.heappop(heap), heapq.heappop(heap)
+    for p in a[1:]: p[1] = '0' + p[1]
+    for p in b[1:]: p[1] = '1' + p[1]
+    heapq.heappush(heap, [a[0]+b[0]] + a[1:] + b[1:])
+codes = {a: b for a, b in heap[0][1:]}
+encoded = ''.join(codes[p] for p in img.flatten())
+print("Original bits:", img.size * 8)
+print("Compressed bits:", len(encoded))
+print("Compression Ratio: %.2f%%" % (len(encoded)/(img.size*8)*100))
